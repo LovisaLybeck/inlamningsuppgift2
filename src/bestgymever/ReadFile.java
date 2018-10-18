@@ -4,60 +4,57 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class ReadFile {
-    
-    public String doesPersonExsist(String fileToRead, String personToFind){
-        
+
+    public String doesPersonExsist(String fileToRead, String personToFind) {
+
         String tempLine;
         String date = "";
-        String[] person = new String[2];
-        
-        try (BufferedReader reader = new BufferedReader( new FileReader(fileToRead))){
-            while((tempLine = reader.readLine()) != null){
+        String[] person;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileToRead))) {
+            while ((tempLine = reader.readLine()) != null) {
                 person = tempLine.split(", ");
-                
-                if(person[0].equalsIgnoreCase(personToFind) || person[1].equalsIgnoreCase(personToFind)){
+
+                if (person[0].equalsIgnoreCase(personToFind) || person[1].equalsIgnoreCase(personToFind)) {
                     date = reader.readLine();
                     break;
                 }
-                
+
                 reader.readLine();
             }
-        }
-        catch(ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             date = "";
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return date;
     }
-    
-    public String getInformation(String fileToRead, String personToFind){
+
+    public String getInformation(String fileToRead, String personToFind) {
         String tempLine;
         String person = "";
-        String[] personSplit = new String[2];
-        
-        try (BufferedReader reader = new BufferedReader( new FileReader(fileToRead))){
-            while((tempLine = reader.readLine()) != null){
+        String[] personSplit;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileToRead))) {
+            while ((tempLine = reader.readLine()) != null) {
                 personSplit = tempLine.split(", ");
-                
-                if(personSplit[0].equalsIgnoreCase(personToFind) || 
-                        personSplit[1].equalsIgnoreCase(personToFind)){
+
+                if (personSplit[0].equalsIgnoreCase(personToFind)
+                        || personSplit[1].equalsIgnoreCase(personToFind)) {
                     person = personSplit[1] + ", " + personSplit[0];
                     break;
                 }
-                
+
                 reader.readLine();
             }
-        }
-        catch(ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             person = "";
-        }
-        catch(Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return person;
     }
 }
